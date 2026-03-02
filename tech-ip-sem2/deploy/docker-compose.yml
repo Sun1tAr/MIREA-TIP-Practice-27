@@ -1,0 +1,94 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: tasks-db
+    environment:
+      POSTGRES_USER: tasks_user
+      POSTGRES_PASSWORD: tasks_pass
+      POSTGRES_DB: tasks_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tasks_user -d tasks_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - app-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: tasks-redis
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  auth:
+    build:
+      context: ../services/auth
+      dockerfile: Dockerfile
+    container_name: auth-service
+    environment:
+      AUTH_HTTP_PORT: 8081
+      AUTH_GRPC_PORT: 50051
+      LOG_LEVEL: info
+    ports:
+      - "8081:8081"
+      - "50051:50051"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  tasks:
+    build:
+      context: ../services/tasks
+      dockerfile: Dockerfile
+    container_name: tasks-service
+    environment:
+      TASKS_PORT: 8082
+      AUTH_GRPC_ADDR: auth:50051
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: tasks_user
+      DB_PASSWORD: tasks_pass
+      DB_NAME: tasks_db
+      DB_DRIVER: postgres
+      REDIS_ADDR: redis:6379
+      REDIS_PASSWORD: ""
+      REDIS_DB: 0
+      CACHE_TTL_SECONDS: 120
+      CACHE_TTL_JITTER_SECONDS: 30
+      LOG_LEVEL: debug
+    ports:
+      - "8082:8082"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      auth:
+        condition: service_started
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
