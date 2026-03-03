@@ -1,0 +1,34 @@
+# Git
+.git
+.gitignore
+
+# IDE
+.idea
+.vscode
+
+# Build artifacts
+bin/
+tmp/
+
+# Logs
+*.log
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Environment files
+.env
+.env.local
+
+# Tests
+test/
+*_test.go
+
+# Coverage
+coverage.out
+
+# GraphQL generated (will be generated during build)
+graph/generated.go
+graph/models_gen.go
+graph/*.resolvers.go

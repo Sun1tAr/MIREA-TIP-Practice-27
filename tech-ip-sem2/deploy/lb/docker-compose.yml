@@ -164,6 +164,29 @@ services:
       - app-network
     restart: unless-stopped
 
+  graphql:
+    build:
+      context: ../../services/graphql
+      dockerfile: Dockerfile
+    container_name: graphql-service
+    environment:
+      GRAPHQL_PORT: 8090
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: tasks_user
+      DB_PASSWORD: tasks_pass
+      DB_NAME: tasks_db
+      DB_DRIVER: postgres
+      LOG_LEVEL: debug
+    ports:
+      - "8090:8090"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+
 networks:
   app-network:
     driver: bridge
