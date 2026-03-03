@@ -1,5 +1,3 @@
-# GraphQL schema for Tasks service
-
 type Task {
   id: ID!
   title: String!
@@ -19,20 +17,12 @@ input UpdateTaskInput {
 }
 
 type Query {
-  # Получить список всех задач
   tasks: [Task!]!
-
-  # Получить задачу по ID
   task(id: ID!): Task
 }
 
 type Mutation {
-  # Создать новую задачу
   createTask(input: CreateTaskInput!): Task!
-
-  # Обновить существующую задачу
   updateTask(id: ID!, input: UpdateTaskInput!): Task!
-
-  # Удалить задачу (возвращает true если удалена, false если не найдена)
   deleteTask(id: ID!): Boolean!
 }

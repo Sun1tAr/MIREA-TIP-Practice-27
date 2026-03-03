@@ -17,15 +17,8 @@ resolver:
   layout: follow-schema
   dir: graph
   package: graph
-  filename_template: "{name}.resolvers.go"
+  filename: "resolver.go"
 
-# Optional: turn on to not generate template comments above resolvers
-# omit_template_comment: false
-
-# Optional: set to speed up generation time by not performing a final validation pass.
-# skip_validation: true
-
-# This section declares type mapping between the GraphQL and go types
 models:
   ID:
     model:
@@ -33,8 +26,3 @@ models:
   Int:
     model:
       - github.com/99designs/gqlgen/graphql.Int
-  # Явно указываем, что Description может быть null
-  Task:
-    fields:
-      description:
-        resolver: true

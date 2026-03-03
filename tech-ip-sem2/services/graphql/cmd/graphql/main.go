@@ -31,7 +31,6 @@ func main() {
 		"db_name": cfg.DB.DBName,
 	}).Info("starting GraphQL service")
 
-	// Инициализация репозитория (БД)
 	var repo repository.TaskRepository
 	if cfg.DB.Driver == "postgres" {
 		postgresRepo, err := repository.NewPostgresTaskRepository(cfg.DB.DSN())
@@ -44,7 +43,6 @@ func main() {
 		logrusLogger.Fatal("unsupported database driver: " + cfg.DB.Driver)
 	}
 
-	// Проверяем подключение к БД
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
@@ -54,13 +52,9 @@ func main() {
 		logrusLogger.Info("database connected successfully")
 	}
 
-	// Создаём резолвер с репозиторием
 	resolver := graph.NewResolver(repo, logrusLogger)
-
-	// Настраиваем GraphQL сервер
 	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: resolver}))
 
-	// Настраиваем маршруты
 	http.Handle("/", playground.Handler("GraphQL Playground", "/query"))
 	http.Handle("/query", srv)
 
@@ -72,7 +66,6 @@ func main() {
 		WriteTimeout: 10 * time.Second,
 	}
 
-	// Запускаем сервер в горутине
 	go func() {
 		logrusLogger.WithField("port", cfg.GraphQLPort).Info("GraphQL server started")
 		logrusLogger.Info("Playground available at http://localhost:" + cfg.GraphQLPort + "/")
@@ -81,7 +74,6 @@ func main() {
 		}
 	}()
 
-	// Graceful shutdown
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit

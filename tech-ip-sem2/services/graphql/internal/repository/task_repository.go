@@ -8,7 +8,6 @@ import (
 	_ "github.com/lib/pq"
 )
 
-// Task — модель задачи для GraphQL сервиса (копия, чтобы не зависеть от internal)
 type Task struct {
 	ID          string
 	Title       string
@@ -18,7 +17,6 @@ type Task struct {
 	UpdatedAt   time.Time
 }
 
-// TaskRepository — интерфейс для работы с задачами
 type TaskRepository interface {
 	Create(ctx context.Context, task *Task) error
 	GetByID(ctx context.Context, id string) (*Task, error)
@@ -28,7 +26,6 @@ type TaskRepository interface {
 	SearchByTitle(ctx context.Context, titleSubstring string) ([]*Task, error)
 }
 
-// PostgresTaskRepository — PostgreSQL реализация
 type PostgresTaskRepository struct {
 	db *sql.DB
 }
@@ -49,7 +46,7 @@ func (r *PostgresTaskRepository) Close() error {
 }
 
 func (r *PostgresTaskRepository) Create(ctx context.Context, task *Task) error {
-	query := `INSERT INTO tasks (id, title, description, done, created_at, updated_at) 
+	query := `INSERT INTO tasks (id, title, description, done, created_at, updated_at)
               VALUES ($1, $2, $3, $4, $5, $6)`
 	_, err := r.db.ExecContext(ctx, query,
 		task.ID, task.Title, task.Description, task.Done, task.CreatedAt, task.UpdatedAt)

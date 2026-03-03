@@ -27,8 +27,3 @@ test/
 
 # Coverage
 coverage.out
-
-# GraphQL generated (will be generated during build)
-graph/generated.go
-graph/models_gen.go
-graph/*.resolvers.go
