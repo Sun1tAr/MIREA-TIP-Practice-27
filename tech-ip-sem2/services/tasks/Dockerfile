@@ -19,7 +19,7 @@ COPY vendor ./vendor
 COPY . .
 
 # Build the application using vendor
-RUN CGO_ENABLED=0 GOOS=linux go build -mod=vendor -o /app/bin/tasks ./cmd/tasks
+RUN CGO_ENABLED=0 GOOS=linux go build -o /app/bin/tasks ./cmd/tasks
 
 # Stage 2: Final image
 FROM alpine:latest

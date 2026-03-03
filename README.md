@@ -13,11 +13,8 @@
 6. [Скриншоты выполнения](#скриншоты-выполнения)
 7. [Выводы](#выводы)
 8. [Контрольные вопросы](#контрольные-вопросы)
-9. [Приложение: Postman коллекция](#приложение-postman-коллекция) 
 
-```java
-// fixme удалить заголовок коллекции
-```
+
 ---
 
 ## Описание проекта
@@ -323,122 +320,43 @@ docker-compose up -d graphql
 
 ## Скриншоты выполнения
 
-### 1. Структура проекта GraphQL сервиса
+Тестирование осуществлялось с использованием [коллекции](https://www.postman.com/lively-flare-564043/workspace/learning/collection/42992055-5eb0b316-6f03-44a5-8d9f-6b998f71ad42?action=share&source=copy-link&creator=42992055) 
 
-**Ожидаемое содержимое скриншота:** Дерево папок `services/graphql` с файлами.
+### 1. Запуск сервиса
 
-```
-[PLACEHOLDER: screen_1_structure.png]
-*Рисунок 1 — Структура GraphQL сервиса*
-```
+![img.png](about/img.png)
 
-### 2. GraphQL схема (schema.graphqls)
+### 2. Playground
 
-**Ожидаемое содержимое скриншота:** Содержимое файла `schema.graphqls`.
+![img_1.png](about/img_1.png)
 
-```
-[PLACEHOLDER: screen_2_schema.png]
-*Рисунок 2 — GraphQL схема*
-```
+### 3. Выполнение query tasks
 
-### 3. Конфигурация gqlgen (gqlgen.yml)
+![img_2.png](about/img_2.png)
 
-**Ожидаемое содержимое скриншота:** Содержимое `gqlgen.yml` с настройками.
+### 4. Выполнение query task
 
-```
-[PLACEHOLDER: screen_3_gqlgen_yml.png]
-*Рисунок 3 — Конфигурация генерации*
-```
+![img_3.png](about/img_3.png)
 
-### 4. Реализация резолвера CreateTask
+### 5. Выполнение mutation createTask
 
-**Ожидаемое содержимое скриншота:** Фрагмент кода из `resolver_impl.go` с функцией CreateTask.
+![img_4.png](about/img_4.png)
 
-```
-[PLACEHOLDER: screen_4_resolver_impl.png]
-*Рисунок 4 — Реализация мутации createTask*
-```
+### 6. Выполнение mutation updateTask
 
-### 5. Запуск сервиса
+![img_5.png](about/img_5.png)
 
-**Ожидаемое содержимое скриншота:** Консоль с запущенным сервисом и логами в стиле Spring.
+### 7. Выполнение mutation deleteTask
 
-```
-[PLACEHOLDER: screen_5_run.png]
-*Рисунок 5 — Запуск GraphQL сервиса*
-```
+![img_6.png](about/img_6.png)
 
-### 6. Playground
-
-**Ожидаемое содержимое скриншота:** Открытый Playground по адресу http://localhost:8090/.
-
-```
-[PLACEHOLDER: screen_6_playground.png]
-*Рисунок 6 — GraphQL Playground*
-```
-
-### 7. Выполнение query tasks
-
-**Ожидаемое содержимое скриншота:** Запрос `{ tasks { id title done } }` и ответ с несколькими задачами.
-
-```
-[PLACEHOLDER: screen_7_query_tasks.png]
-*Рисунок 7 — Запрос списка задач*
-```
-
-### 8. Выполнение query task
-
-**Ожидаемое содержимое скриншота:** Запрос задачи по ID с переменными.
-
-```
-[PLACEHOLDER: screen_8_query_task.png]
-*Рисунок 8 — Запрос задачи по ID*
-```
-
-### 9. Выполнение mutation createTask
-
-**Ожидаемое содержимое скриншота:** Создание задачи с переменными и ответ.
-
-```
-[PLACEHOLDER: screen_9_mutation_create.png]
-*Рисунок 9 — Создание задачи*
-```
-
-### 10. Выполнение mutation updateTask
-
-**Ожидаемое содержимое скриншота:** Обновление задачи (например, отметка о выполнении).
-
-```
-[PLACEHOLDER: screen_10_mutation_update.png]
-*Рисунок 10 — Обновление задачи*
-```
-
-### 11. Выполнение mutation deleteTask
-
-**Ожидаемое содержимое скриншота:** Удаление задачи с ответом `true`.
-
-```
-[PLACEHOLDER: screen_11_mutation_delete.png]
-*Рисунок 11 — Удаление задачи*
-```
-
-### 12. Логи сервиса при запросах
+### 8. Логи сервиса при запросах
 
 **Ожидаемое содержимое скриншота:** Логи сервиса с форматированием как в Spring Boot.
 
-```
-[PLACEHOLDER: screen_12_spring_logs.png]
-*Рисунок 12 — Логи в стиле Spring Boot*
-```
+![img_7.png](about/img_7.png)
 
-### 13. Postman коллекция
 
-**Ожидаемое содержимое скриншота:** Postman с открытой коллекцией `MIREA-TIP-Practice-27`.
-
-```
-[PLACEHOLDER: screen_13_postman.png]
-*Рисунок 13 — Postman коллекция для тестирования GraphQL*
-```
 
 ---
 
@@ -557,262 +475,3 @@ query {
 - Анализ сложности запроса (query cost analysis)
 - DataLoader для решения N+1 проблемы
 
----
-
-## Приложение: Postman коллекция
-```java
-// fixme перенести к скриншотам
-```
-### Файл: `MIREA-TIP-Practice-27.postman_collection.json`
-
-```json
-{
-  "info": {
-    "name": "MIREA-TIP-Practice-27",
-    "description": "GraphQL API для управления задачами (ПЗ №11)",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_postman_id": "mirea-tip-practice-27-graphql"
-  },
-  "item": [
-    {
-      "name": "Query: Получить все задачи",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
-          }
-        ],
-        "body": {
-          "mode": "graphql",
-          "graphql": {
-            "query": "query {\n  tasks {\n    id\n    title\n    description\n    done\n  }\n}"
-          }
-        },
-        "url": "http://localhost:8090/query"
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test('Status is 200', () => {",
-              "  pm.response.to.have.status(200);",
-              "});",
-              "",
-              "pm.test('Response has data.tasks array', () => {",
-              "  const body = pm.response.json();",
-              "  pm.expect(body).to.have.property('data');",
-              "  pm.expect(body.data).to.have.property('tasks');",
-              "  pm.expect(body.data.tasks).to.be.an('array');",
-              "});"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "name": "Query: Получить задачу по ID",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
-          }
-        ],
-        "body": {
-          "mode": "graphql",
-          "graphql": {
-            "query": "query GetTask($id: ID!) {\n  task(id: $id) {\n    id\n    title\n    description\n    done\n  }\n}",
-            "variables": "{\n  \"id\": \"t_123\"\n}"
-          }
-        },
-        "url": "http://localhost:8090/query"
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test('Status is 200', () => {",
-              "  pm.response.to.have.status(200);",
-              "});",
-              "",
-              "pm.test('Response has data.task', () => {",
-              "  const body = pm.response.json();",
-              "  pm.expect(body).to.have.property('data');",
-              "  pm.expect(body.data).to.have.property('task');",
-              "});"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "name": "Mutation: Создать задачу",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
-          }
-        ],
-        "body": {
-          "mode": "graphql",
-          "graphql": {
-            "query": "mutation CreateTask($input: CreateTaskInput!) {\n  createTask(input: $input) {\n    id\n    title\n    description\n    done\n  }\n}",
-            "variables": "{\n  \"input\": {\n    \"title\": \"GraphQL Task\",\n    \"description\": \"Created via Postman\"\n  }\n}"
-          }
-        },
-        "url": "http://localhost:8090/query"
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test('Status is 200', () => {",
-              "  pm.response.to.have.status(200);",
-              "});",
-              "",
-              "pm.test('Task created successfully', () => {",
-              "  const body = pm.response.json();",
-              "  pm.expect(body).to.have.property('data');",
-              "  pm.expect(body.data.createTask).to.have.property('id');",
-              "  pm.expect(body.data.createTask.title).to.eql('GraphQL Task');",
-              "});",
-              "",
-              "pm.environment.set('taskId', pm.response.json().data.createTask.id);"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "name": "Mutation: Обновить задачу",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
-          }
-        ],
-        "body": {
-          "mode": "graphql",
-          "graphql": {
-            "query": "mutation UpdateTask($id: ID!, $input: UpdateTaskInput!) {\n  updateTask(id: $id, input: $input) {\n    id\n    title\n    description\n    done\n  }\n}",
-            "variables": "{\n  \"id\": \"{{taskId}}\",\n  \"input\": {\n    \"done\": true\n  }\n}"
-          }
-        },
-        "url": "http://localhost:8090/query"
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test('Status is 200', () => {",
-              "  pm.response.to.have.status(200);",
-              "});",
-              "",
-              "pm.test('Task updated successfully', () => {",
-              "  const body = pm.response.json();",
-              "  pm.expect(body).to.have.property('data');",
-              "  pm.expect(body.data.updateTask).to.have.property('id');",
-              "  pm.expect(body.data.updateTask.done).to.eql(true);",
-              "});"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "name": "Mutation: Удалить задачу",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
-          }
-        ],
-        "body": {
-          "mode": "graphql",
-          "graphql": {
-            "query": "mutation DeleteTask($id: ID!) {\n  deleteTask(id: $id)\n}",
-            "variables": "{\n  \"id\": \"{{taskId}}\"\n}"
-          }
-        },
-        "url": "http://localhost:8090/query"
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test('Status is 200', () => {",
-              "  pm.response.to.have.status(200);",
-              "});",
-              "",
-              "pm.test('Task deleted successfully', () => {",
-              "  const body = pm.response.json();",
-              "  pm.expect(body).to.have.property('data');",
-              "  pm.expect(body.data.deleteTask).to.eql(true);",
-              "});"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "name": "Query: Проверить удаление (должен быть null)",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
-          }
-        ],
-        "body": {
-          "mode": "graphql",
-          "graphql": {
-            "query": "query GetTask($id: ID!) {\n  task(id: $id) {\n    id\n    title\n  }\n}",
-            "variables": "{\n  \"id\": \"{{taskId}}\"\n}"
-          }
-        },
-        "url": "http://localhost:8090/query"
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test('Status is 200', () => {",
-              "  pm.response.to.have.status(200);",
-              "});",
-              "",
-              "pm.test('Task is null (not found)', () => {",
-              "  const body = pm.response.json();",
-              "  pm.expect(body).to.have.property('data');",
-              "  pm.expect(body.data.task).to.eql(null);",
-              "});"
-            ]
-          }
-        }
-      ]
-    }
-  ],
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "http://localhost:8090",
-      "type": "string"
-    }
-  ]
-}
-```
